@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Eventora – discover, explore and register for upcoming tech, music, sports and cultural events." />
+  <title>Eventora | Discover & Register for Events</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#events">Skip to events</a>
+
+  <header class="header" id="top">
+    <div class="container nav">
+      <a href="#top" class="logo" aria-label="Eventora home"><span class="logo-mark">✦</span> Eventora</a>
+
+      <nav id="nav-menu" class="nav-menu" aria-label="Main navigation">
+        <a href="#events">Events</a>
+        <a href="#how">How it works</a>
+        <a href="#my-registrations">My Registrations <span class="badge" id="reg-count">0</span></a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="icon-btn" aria-label="Switch to dark mode" title="Toggle theme">🌙</button>
+        <button id="menu-toggle" class="icon-btn menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text reveal">
+          <span class="pill">🎉 Over 500+ attendees joined last season</span>
+          <h1>Find events worth <span class="gradient-text">showing up for.</span></h1>
+          <p>From hackathons to music nights — explore what's happening near you, grab your seat in seconds, and never miss a moment.</p>
+          <div class="hero-cta">
+            <a href="#events" class="btn btn-primary">Explore Events</a>
+            <a href="#my-registrations" class="btn btn-ghost">My Registrations</a>
+          </div>
+        </div>
+
+        <aside class="countdown-card reveal" aria-label="Next event countdown">
+          <p class="countdown-label">Next up</p>
+          <h2 id="next-event-name">Loading…</h2>
+          <p id="next-event-meta" class="muted"></p>
+          <div class="countdown" id="countdown" role="timer" aria-live="off">
+            <div><span id="cd-days">00</span><small>Days</small></div>
+            <div><span id="cd-hours">00</span><small>Hours</small></div>
+            <div><span id="cd-mins">00</span><small>Mins</small></div>
+            <div><span id="cd-secs">00</span><small>Secs</small></div>
+          </div>
+          <button id="next-event-btn" class="btn btn-primary btn-block">Register Now</button>
+        </aside>
+      </div>
+      <div class="blob blob-1" aria-hidden="true"></div>
+      <div class="blob blob-2" aria-hidden="true"></div>
+    </section>
+
+    <section class="section" id="events">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Upcoming & Featured Events</h2>
+          <p class="muted">Search, filter and pick your next experience.</p>
+        </div>
+
+        <div class="controls reveal">
+          <label class="search" for="search">
+            <span aria-hidden="true">🔍</span>
+            <input id="search" type="search" placeholder="Search by name, venue or keyword…" autocomplete="off" />
+          </label>
+          <div id="filters" class="filters" role="group" aria-label="Filter by category"></div>
+        </div>
+
+        <p id="result-count" class="muted result-count" aria-live="polite"></p>
+        <div id="event-grid" class="grid"></div>
+
+        <div id="empty-state" class="empty" hidden>
+          <div class="empty-emoji">🕵️</div>
+          <h3>No events found</h3>
+          <p class="muted">Try a different keyword or category.</p>
+          <button id="reset-filters" class="btn btn-ghost">Reset filters</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="how">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>How it works</h2>
+          <p class="muted">Three quick steps to your next event.</p>
+        </div>
+        <div class="steps">
+          <article class="step reveal"><span class="step-num">1</span><h3>Discover</h3><p>Browse featured events or search and filter by category.</p></article>
+          <article class="step reveal"><span class="step-num">2</span><h3>Register</h3><p>Open an event, review the details and fill a quick form.</p></article>
+          <article class="step reveal"><span class="step-num">3</span><h3>Show up</h3><p>Get instant confirmation and track everything in one place.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="my-registrations">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>My Registrations</h2>
+          <p class="muted">Saved locally in your browser using Local Storage.</p>
+        </div>
+        <div id="reg-list" class="reg-list"></div>
+        <div class="center">
+          <button id="clear-regs" class="btn btn-ghost" hidden>Clear all registrations</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p><strong>✦ Eventora</strong> — built for the K Explore Web Designing challenge.</p>
+      <p class="muted">HTML5 · CSS3 · Vanilla JavaScript</p>
+    </div>
+  </footer>
+
+  <dialog id="event-modal" class="modal" aria-labelledby="modal-title">
+    <button class="modal-close icon-btn" id="modal-close" aria-label="Close dialog">✕</button>
+
+    <div id="modal-hero" class="modal-hero"></div>
+
+    <div class="modal-body">
+      <div class="modal-grid">
+        <div>
+          <span id="modal-category" class="tag"></span>
+          <h2 id="modal-title"></h2>
+          <ul class="meta-list">
+            <li><span aria-hidden="true">📅</span> <span id="modal-date"></span></li>
+            <li><span aria-hidden="true">📍</span> <span id="modal-venue"></span></li>
+            <li><span aria-hidden="true">🎟️</span> <span id="modal-price"></span></li>
+            <li><span aria-hidden="true">👥</span> <span id="modal-seats"></span></li>
+          </ul>
+          <p id="modal-desc" class="modal-desc"></p>
+        </div>
+
+        <div class="form-wrap">
+          <div id="form-view">
+            <h3>Register for this event</h3>
+            <form id="reg-form" novalidate>
+              <div class="field">
+                <label for="f-name">Full name</label>
+                <input id="f-name" name="name" type="text" autocomplete="name" placeholder="e.g. Sujal Sharma" />
+                <small class="error" id="e-name" role="alert"></small>
+              </div>
+              <div class="field">
+                <label for="f-email">Email address</label>
+                <input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" />
+                <small class="error" id="e-email" role="alert"></small>
+              </div>
+              <div class="field">
+                <label for="f-phone">Phone number</label>
+                <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="10-digit mobile number" />
+                <small class="error" id="e-phone" role="alert"></small>
+              </div>
+              <div class="field">
+                <label for="f-event">Selected event</label>
+                <select id="f-event" name="event"></select>
+                <small class="error" id="e-event" role="alert"></small>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Confirm Registration</button>
+            </form>
+          </div>
+
+          <div id="success-view" class="success" hidden>
+            <div class="success-icon">✓</div>
+            <h3>You're in! 🎉</h3>
+            <p id="success-msg"></p>
+            <p class="muted" id="success-ref"></p>
+            <button class="btn btn-primary" id="success-close">Done</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
